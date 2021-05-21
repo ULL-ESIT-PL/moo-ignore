@@ -137,7 +137,7 @@ try {
 To execute it:
 
 ```
-$ nearleyc test/test-grammar.ne -o test/test-grammar.js
+$ npx nearleyc test/test-grammar.ne -o test/test-grammar.js
 $ node test/test.js"
 ```
 
