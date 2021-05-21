@@ -13,7 +13,7 @@ lexer.ignore("ws");
 
 function makeWord(token) {
   const { text, line, offset, col, name } = token;
-  console.log(text); ins(token);
+  //console.log(text); ins(token);
   return {type: 'word', name: (text || name)}; //, line: line, col: col, offset: offset};
 }
 
