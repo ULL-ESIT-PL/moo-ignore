@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/ULL-ESIT-PL/moo-ignore.git"
   },
-  "keywords": ['Nearley', 'moo', 'lexer', 'ULL'],
+  "keywords": ["Nearley", "moo", "lexer", "ULL"],
   "author": "Casiano Rodriguez-Leon <casiano.rodriguez.leon@gmail.com> (https://github.com/crguezl)",
   "license": "ISC",
   "bugs": {
