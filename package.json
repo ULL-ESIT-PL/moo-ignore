@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "nearleyc test/test-grammar.ne -o test/test-grammar.js",
+    "test": "npm run compile; node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/ULL-ESIT-PL/moo-ignore/issues"
   },
-  "homepage": "https://github.com/ULL-ESIT-PL/moo-ignore#readme"
+  "homepage": "https://github.com/ULL-ESIT-PL/moo-ignore#readme",
+  "dependencies": {
+    "moo": "^0.5.1",
+    "nearley": "^2.20.1"
+  }
 }
