@@ -1,17 +1,17 @@
-Moo-ignore
-====
+# Moo-ignore
 
 Moo-ignore is a wrapper around the [moo](https://www.npmjs.com/package/moo) tokenizer/lexer generator that provides a [nearley.js](https://github.com/hardmath123/nearley)compatible lexer with the capacity to ignore specified tokens.
 
 
-Usage
------
+## Usage
 
 Install it: 
 
 ```
 $ npm install moo-ignore
 ``` 
+
+### Ignoring tokens
 
 Then you can use it in your Nearley.js program and ignore white spaces and comments:
 
@@ -20,8 +20,8 @@ Then you can use it in your Nearley.js program and ignore white spaces and comme
 @{%
 const tokens = require("./tokens");
 const { makeLexer } = require("moo-ignore");
-let lexer = makeLexer(tokens);
-lexer.ignore("ws");
+let lexer = makeLexer(tokens); // Build the lexer
+lexer.ignore("ws"); // list of types of the tokens to ignore
 %}
 
 @lexer lexer

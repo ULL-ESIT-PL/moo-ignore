@@ -1,6 +1,5 @@
 const nearley = require("nearley");
 const grammar = require("./test-grammar.js");
-const { lexer } = require('../index.js');
 const util = require('util');
 const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
