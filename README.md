@@ -13,7 +13,7 @@ Install it:
 $ npm install moo-ignore
 ``` 
 
-Then you can use it in your Nearley.js program and ignore white spaes and comments:
+Then you can use it in your Nearley.js program and ignore white spaces and comments:
 
 
 ```js
@@ -51,7 +51,7 @@ FUN   ->      %fun        {% id %}
 SEMICOLON ->  ";"         {% id %}
 ```
 
-The file `tokens.js`:
+Here is the contents of the file `tokens.js` we have used in the former code:
 
 ```js
 const moo = require("moo");
