@@ -7,35 +7,131 @@ Moo-ignore is a wrapper around the [moo](https://www.npmjs.com/package/moo) toke
 Usage
 -----
 
-First, you need to do the needful: `$ npm install moo`, or whatever will ship this code to your computer. Alternatively, grab the `moo.js` file by itself and slap it into your web page via a `<script>` tag; moo is completely standalone.
+Install it: 
+
+```
+$ npm install moo-ignore
+``` 
 
 Then you can start roasting your very own lexer/tokenizer:
 
 ```js
-    const moo = require('moo')
+@{%
+const tokens = require("./tokens");
+const { makeLexer } = require("moo-ignore");
+let lexer = makeLexer(tokens);
+lexer.ignore("ws");
+%}
 
-    let lexer = moo.compile({
-      WS:      /[ \t]+/,
-      comment: /\/\/.*?$/,
-      number:  /0|[1-9][0-9]*/,
-      string:  /"(?:\\["\\]|[^\n"\\])*"/,
-      lparen:  '(',
-      rparen:  ')',
-      keyword: ['while', 'if', 'else', 'moo', 'cows'],
-      NL:      { match: /\n/, lineBreaks: true },
-    })
+@lexer lexer
+
+S -> Function  
+
+Function -> FUN  LP NameList  RP StList END  
+
+NameList -> name  
+    | NameList COMMA  name 
+
+StList -> Statement   
+    | StList SEMICOLON Statement 
+
+Statement -> null  
+     | DO StList  END 
+
+# Lexical part
+
+name  ->      %identifier {% id %}
+COMMA ->       ","        {% id %}
+LP    ->       "("        {% id %}
+RP    ->       ")"        {% id %}
+END   ->      %end        {% id %}
+DO    ->      %dolua      {% id %}
+FUN   ->      %fun        {% id %}
+SEMICOLON ->  ";"         {% id %}
 ```
 
 And now throw some text at it:
 
 ```js
-    lexer.reset('while (10) cows\nmoo')
-    lexer.next() // -> { type: 'keyword', value: 'while' }
-    lexer.next() // -> { type: 'WS', value: ' ' }
-    lexer.next() // -> { type: 'lparen', value: '(' }
-    lexer.next() // -> { type: 'number', value: '10' }
-    // ...
+const moo = require("moo");
+
+module.exports = {
+    ws: { match: /\s+|#[^\n]*/, lineBreaks: true },
+    lte: "<=",
+    lt: "<",
+    gte: ">=",
+    gt: ">",
+    eq: "==",
+    lparan: "(",
+    rparan: ")",
+    comma: ",",
+    lbracket: "[",
+    rbracket: "]",
+    lbrace: "{",
+    rbrace: "}",
+    assignment: "=",
+    plus: "+",
+    minus: "-",
+    multiply: "*",
+    divide: "/",
+    modulo: "%",
+    colon: ":",
+    semicolon: ";",
+    string_literal: {
+        match: /"(?:[^\n\\"]|\\["\\ntbfr])*"/,
+        value: s => JSON.parse(s)
+    },
+    number_literal: {
+        match: /[0-9]+(?:\.[0-9]+)?/,
+        value: s => Number(s)
+    },
+    identifier: {
+        match: /[a-z_][a-z_0-9]*/,
+        type: moo.keywords({
+            fun: "fun",
+            proc: "proc",
+            while: "while",
+            for: "for",
+            else: "else",
+            in: "in",
+            if: "if",
+            return: "return",
+            and: "and",
+            or: "or",
+            true: "true",
+            false: "false",
+            end: "end",
+            dolua: "do"
+        })
+    }
+}
 ```
+
+```js
+const nearley = require("nearley");
+const grammar = require("./test-grammar.js");
+const { lexer } = require('moo-ignore');
+const util = require('util');
+const ins = obj => console.log(util.inspect(obj, { depth: null }));
+
+let s = `
+fun (id, idtwo, idthree)  
+  do  
+    do end;
+    do end
+  end 
+end`;
+let ans;
+try {
+    const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+   // Parse something!
+    parser.feed(s);
+    ins(parser.results);
+} catch (e) {
+    console.log(e);
+}
+```
+
 
 When you reach the end of Moo's internal buffer, next() will return `undefined`. You can always `reset()` it and feed it more data when that happens.
 
