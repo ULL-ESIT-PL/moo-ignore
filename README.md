@@ -13,7 +13,8 @@ Install it:
 $ npm install moo-ignore
 ``` 
 
-Then you can start roasting your very own lexer/tokenizer:
+Then you can use it in your Nearley.js program and ignore white spaes and comments:
+
 
 ```js
 @{%
@@ -57,34 +58,14 @@ const moo = require("moo");
 
 module.exports = {
     ws: { match: /\s+|#[^\n]*/, lineBreaks: true },
-    lte: "<=",
-    lt: "<",
-    gte: ">=",
-    gt: ">",
     eq: "==",
     lparan: "(",
     rparan: ")",
     comma: ",",
     lbracket: "[",
-    rbracket: "]",
-    lbrace: "{",
-    rbrace: "}",
-    assignment: "=",
-    plus: "+",
-    minus: "-",
-    multiply: "*",
-    divide: "/",
-    modulo: "%",
-    colon: ":",
+
     semicolon: ";",
-    string_literal: {
-        match: /"(?:[^\n\\"]|\\["\\ntbfr])*"/,
-        value: s => JSON.parse(s)
-    },
-    number_literal: {
-        match: /[0-9]+(?:\.[0-9]+)?/,
-        value: s => Number(s)
-    },
+
     identifier: {
         match: /[a-z_][a-z_0-9]*/,
         type: moo.keywords({
@@ -93,8 +74,6 @@ module.exports = {
             while: "while",
             for: "for",
             else: "else",
-            in: "in",
-            if: "if",
             return: "return",
             and: "and",
             or: "or",
@@ -107,7 +86,7 @@ module.exports = {
 }
 ```
 
-Here is a program `test.js` to execute it:
+Here is a program `test.js` to use the grammar and lexer:
 
 ```js
 const nearley = require("nearley");
