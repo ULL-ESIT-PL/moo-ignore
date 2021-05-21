@@ -1,4 +1,4 @@
-const moo = require("moo");
+const { moo } = require("../index.js");
 
 module.exports = {
     ws: { match: /\s+|#[^\n]*/, lineBreaks: true },

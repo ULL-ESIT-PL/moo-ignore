@@ -54,7 +54,7 @@ SEMICOLON ->  ";"         {% id %}
 Here is the contents of the file `tokens.js` we have used in the former code:
 
 ```js
-const moo = require("moo");
+const { moo } = require("moo-ignore");
 
 module.exports = {
     ws: { match: /\s+|#[^\n]*/, lineBreaks: true },
@@ -91,7 +91,7 @@ Here is a program `test.js` to use the grammar and lexer:
 ```js
 const nearley = require("nearley");
 const grammar = require("./test-grammar.js");
-const { lexer } = require('moo-ignore');
+
 const util = require('util');
 const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
@@ -119,6 +119,3 @@ To execute it:
 $ npx nearleyc test/test-grammar.ne -o test/test-grammar.js
 $ node test/test.js"
 ```
-
-When you reach the end of Moo's internal buffer, next() will return `undefined`. You can always `reset()` it and feed it more data when that happens.
-

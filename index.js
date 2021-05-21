@@ -27,4 +27,4 @@ function makeLexer(tokens) {
   return lexer;
 }
 
-module.exports = {makeLexer};
+module.exports = {makeLexer, moo};
