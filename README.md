@@ -50,7 +50,7 @@ FUN   ->      %fun        {% id %}
 SEMICOLON ->  ";"         {% id %}
 ```
 
-And now throw some text at it:
+The file `tokens.js`:
 
 ```js
 const moo = require("moo");
@@ -107,6 +107,8 @@ module.exports = {
 }
 ```
 
+Here is a program `test.js` to execute it:
+
 ```js
 const nearley = require("nearley");
 const grammar = require("./test-grammar.js");
@@ -132,6 +134,12 @@ try {
 }
 ```
 
+To execute it:
+
+```
+$ nearleyc test/test-grammar.ne -o test/test-grammar.js
+$ node test/test.js"
+```
 
 When you reach the end of Moo's internal buffer, next() will return `undefined`. You can always `reset()` it and feed it more data when that happens.
 
