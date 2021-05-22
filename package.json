@@ -1,6 +1,6 @@
 {
   "name": "moo-ignore",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,9 @@
     "ULL"
   ],
   "author": "Casiano Rodriguez-Leon <casiano.rodriguez.leon@gmail.com> (https://github.com/crguezl)",
-  "contributors": ["Daniel del Castillo (https://www.npmjs.com/~daniel-del-castillo)"],
+  "contributors": [
+    "Daniel del Castillo (https://www.npmjs.com/~daniel-del-castillo)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ULL-ESIT-PL/moo-ignore/issues"
