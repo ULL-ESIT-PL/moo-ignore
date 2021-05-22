@@ -18,6 +18,7 @@
     "ULL"
   ],
   "author": "Casiano Rodriguez-Leon <casiano.rodriguez.leon@gmail.com> (https://github.com/crguezl)",
+  "contributors": ["Daniel del Castillo (https://www.npmjs.com/~daniel-del-castillo)"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ULL-ESIT-PL/moo-ignore/issues"
