@@ -19,36 +19,31 @@ Then you can use it in your Nearley.js program and ignore white spaces and comme
 ```js
 @{%
 const tokens = require("./tokens");
-const { makeLexer } = require("moo-ignore");
-let lexer = makeLexer(tokens); // Build the lexer
-lexer.ignore("ws"); // list of types of the tokens to ignore
+const { makeLexer } = require("../index.js");
+
+let lexer = makeLexer(tokens);
+lexer.ignore("ws", "comment");
 %}
 
 @lexer lexer
 
-S -> Function  
-
+S -> Function  {% d => true %}
 Function -> FUN  LP NameList  RP StList END  
-
 NameList -> name  
     | NameList COMMA  name 
-
-StList -> Statement   
+StList -> Statement         
     | StList SEMICOLON Statement 
-
 Statement -> null  
      | DO StList  END 
 
-# Lexical part
-
-name  ->      %identifier {% id %}
-COMMA ->       ","        {% id %}
-LP    ->       "("        {% id %}
-RP    ->       ")"        {% id %}
-END   ->      %end        {% id %}
-DO    ->      %dolua      {% id %}
-FUN   ->      %fun        {% id %}
-SEMICOLON ->  ";"         {% id %}
+name  ->      %identifier
+COMMA ->       ","       
+LP    ->       "("       
+RP    ->       ")"       
+END   ->      %end       
+DO    ->      %dolua     
+FUN   ->      %fun       
+SEMICOLON ->  ";"        
 ```
 
 Here is the contents of the file `tokens.js` we have used in the former code:
@@ -57,28 +52,16 @@ Here is the contents of the file `tokens.js` we have used in the former code:
 const { moo } = require("moo-ignore");
 
 module.exports = {
-    ws: { match: /\s+|#[^\n]*/, lineBreaks: true },
-    eq: "==",
+    ws: { match: /\s+/, lineBreaks: true },
+    comment: /#[^\n]*/,
     lparan: "(",
     rparan: ")",
     comma: ",",
-    lbracket: "[",
-
     semicolon: ";",
-
     identifier: {
         match: /[a-z_][a-z_0-9]*/,
         type: moo.keywords({
             fun: "fun",
-            proc: "proc",
-            while: "while",
-            for: "for",
-            else: "else",
-            return: "return",
-            and: "and",
-            or: "or",
-            true: "true",
-            false: "false",
             end: "end",
             dolua: "do"
         })
@@ -91,15 +74,14 @@ Here is a program `test.js` to use the grammar and lexer:
 ```js
 const nearley = require("nearley");
 const grammar = require("./test-grammar.js");
-
 const util = require('util');
 const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
 let s = `
 fun (id, idtwo, idthree)  
-  do  
+  do   #hello
     do end;
-    do end
+    do end # another comment
   end 
 end`;
 let ans;

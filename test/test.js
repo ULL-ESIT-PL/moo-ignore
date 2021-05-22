@@ -7,7 +7,7 @@ let s = `
 fun (id, idtwo, idthree)  
   do   #hello
     do end;
-    do end
+    do end # another comment
   end 
 end`;
 let ans;

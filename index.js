@@ -18,7 +18,8 @@ function makeLexer(tokens) {
         let token = oldnext.call(this);
         if (token == undefined || !this.ignore.has(token.type)) {
           return token;
-        }
+        } 
+        //console.error("ignoring token "+token.type);
       }
     } catch (e) {
         console.error("Eh!\n" + e)
