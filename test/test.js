@@ -5,7 +5,7 @@ const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
 let s = `
 fun (id, idtwo, idthree)  
-  do  
+  do   #hello
     do end;
     do end
   end 

@@ -13,16 +13,16 @@ function makeLexer(tokens) {
   }
   
   lexer.next = function () {
-      try {
-          let token = oldnext.call(this);
-          if (token && this.ignore.has(token.type)) {
-              token = oldnext.call(this);
-          }
+    try {
+      while (true) {
+        let token = oldnext.call(this);
+        if (token == undefined || !this.ignore.has(token.type)) {
           return token;
-      } catch (e) {
-          console.error("Eh!\n" + e)
+        }
       }
-  
+    } catch (e) {
+        console.error("Eh!\n" + e)
+    }
   };
   return lexer;
 }
