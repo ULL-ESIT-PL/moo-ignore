@@ -56,7 +56,7 @@ Alternatively, you can set to ignore some tokens in the call to `makeLexer`:
 let lexer = makeLexer(tokens, ["ws", "comment"]);
 ```
 
-Or y ou can also combine both ways:
+Or you can also combine both ways:
 
 ```js
 let lexer = makeLexer(tokens, ["ws"]);
