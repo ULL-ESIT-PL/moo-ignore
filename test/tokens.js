@@ -8,7 +8,7 @@ module.exports = {
     comma: ",",
     semicolon: ";",
     identifier: {
-        match: /[a-z_][a-z_0-9]*/,
+        match: /\b[a-z_][\w_]*\b/,
         type: moo.keywords({
             fun: "fun",
             end: "end",
