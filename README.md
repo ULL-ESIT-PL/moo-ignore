@@ -25,6 +25,10 @@ const { makeLexer } = require("../index.js");
 // let lexer = makeLexer(tokens, ["ws", "comment"]);
 let lexer = makeLexer(tokens);
 lexer.ignore("ws", "comment");
+// You can also combine both ways:
+// let lexer = makeLexer(tokens, ["ws"]);
+// lexer.ignore("comment");
+
 
 const getType = ([t]) => t.type;
 %}
