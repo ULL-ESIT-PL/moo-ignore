@@ -13,7 +13,7 @@ $ npm install moo-ignore
 
 ### Ignoring tokens
 
-Then you can use it in your Nearley.js program and ignore white spaces and comments:
+Then you can use it in your Nearley.js program and ignore some tokens like white spaces and comments:
 
 
 ```js
@@ -21,30 +21,33 @@ Then you can use it in your Nearley.js program and ignore white spaces and comme
 const tokens = require("./tokens");
 const { makeLexer } = require("../index.js");
 
+// Alternatively, you can set to ignore some tokens in the call to `makeLexer`:
+// let lexer = makeLexer(tokens, ["ws", "comment"]);
 let lexer = makeLexer(tokens);
 lexer.ignore("ws", "comment");
+
+const getType = ([t]) => t.type;
 %}
 
 @lexer lexer
 
-S -> Function  {% d => true %}
-Function -> FUN  LP NameList  RP StList END  
-NameList -> name  
-    | NameList COMMA  name 
-StList -> Statement         
-    | StList SEMICOLON Statement 
-Statement -> null  
-     | DO StList  END 
+S -> FUN LP name COMMA name COMMA name RP 
+      DO 
+        DO  END SEMICOLON 
+        DO END 
+      END
+     END
 
-name  ->      %identifier
-COMMA ->       ","       
-LP    ->       "("       
-RP    ->       ")"       
-END   ->      %end       
-DO    ->      %dolua     
-FUN   ->      %fun       
-SEMICOLON ->  ";"        
+name  ->      %identifier {% getType %}
+COMMA ->       ","        {% getType %}
+LP    ->       "("        {% getType %}
+RP    ->       ")"        {% getType %}
+END   ->      %end        {% getType %}
+DO    ->      %dolua      {% getType %}
+FUN   ->      %fun        {% getType %}
+SEMICOLON ->  ";"         {% getType %}
 ```
+
 
 Here is the contents of the file `tokens.js` we have used in the former code:
 
@@ -54,8 +57,8 @@ const { moo } = require("moo-ignore");
 module.exports = {
     ws: { match: /\s+/, lineBreaks: true },
     comment: /#[^\n]*/,
-    lparan: "(",
-    rparan: ")",
+    lp: "(",
+    rp: ")",
     comma: ",",
     semicolon: ";",
     identifier: {
@@ -69,35 +72,4 @@ module.exports = {
 }
 ```
 
-Here is a program `test.js` to use the grammar and lexer:
-
-```js
-const nearley = require("nearley");
-const grammar = require("./test-grammar.js");
-const util = require('util');
-const ins = obj => console.log(util.inspect(obj, { depth: null }));
-
-let s = `
-fun (id, idtwo, idthree)  
-  do   #hello
-    do end;
-    do end # another comment
-  end 
-end`;
-let ans;
-try {
-    const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
-   // Parse something!
-    parser.feed(s);
-    ins(parser.results);
-} catch (e) {
-    console.log(e);
-}
-```
-
-To execute it:
-
-```
-$ npx nearleyc test/test-grammar.ne -o test/test-grammar.js
-$ node test/test.js"
-```
+See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) for more examples of use.

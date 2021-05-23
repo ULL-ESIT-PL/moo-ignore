@@ -18,10 +18,10 @@ S -> FUN LP name COMMA name COMMA name RP
      END
 
 name  ->      %identifier {% getType %}
-COMMA ->       ","       {% getType %}
-LP    ->       "("       {% getType %}
-RP    ->       ")"       {% getType %}
-END   ->      %end       {% getType %}
-DO    ->      %dolua     {% getType %}
-FUN   ->      %fun       {% getType %}
-SEMICOLON ->  ";"        {% getType %}
+COMMA ->       ","        {% getType %}
+LP    ->       "("        {% getType %}
+RP    ->       ")"        {% getType %}
+END   ->      %end        {% getType %}
+DO    ->      %dolua      {% getType %}
+FUN   ->      %fun        {% getType %}
+SEMICOLON ->  ";"         {% getType %}
