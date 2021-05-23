@@ -3,8 +3,8 @@ const { moo } = require("../index.js");
 module.exports = {
     ws: { match: /\s+/, lineBreaks: true },
     comment: /#[^\n]*/,
-    lparan: "(",
-    rparan: ")",
+    lp: "(",
+    rp: ")",
     comma: ",",
     semicolon: ";",
     identifier: {

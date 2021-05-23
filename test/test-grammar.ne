@@ -4,24 +4,24 @@ const { makeLexer } = require("../index.js");
 
 let lexer = makeLexer(tokens);
 lexer.ignore("ws", "comment");
+
+const getType = ([t]) => t.type;
 %}
 
 @lexer lexer
 
-S -> Function  {% d => true %}
-Function -> FUN  LP NameList  RP StList END  
-NameList -> name  
-    | NameList COMMA  name 
-StList -> Statement         
-    | StList SEMICOLON Statement 
-Statement -> null  
-     | DO StList  END 
+S -> FUN LP name COMMA name COMMA name RP 
+      DO 
+        DO  END SEMICOLON 
+        DO END 
+      END
+     END
 
-name  ->      %identifier
-COMMA ->       ","       
-LP    ->       "("       
-RP    ->       ")"       
-END   ->      %end       
-DO    ->      %dolua     
-FUN   ->      %fun       
-SEMICOLON ->  ";"        
+name  ->      %identifier {% getType %}
+COMMA ->       ","       {% getType %}
+LP    ->       "("       {% getType %}
+RP    ->       ")"       {% getType %}
+END   ->      %end       {% getType %}
+DO    ->      %dolua     {% getType %}
+FUN   ->      %fun       {% getType %}
+SEMICOLON ->  ";"        {% getType %}
