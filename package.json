@@ -8,7 +8,8 @@
     "compile-2-args": "nearleyc test/test-grammar-2-args.ne -o test/test-grammar-2-args.js",
     "compile-combined": "nearleyc test/test-grammar-combined.ne -o test/test-grammar-combined.js",
     "compile": "npm run compile-separated-ignore; npm run compile-2-args; npm run compile-combined",
-    "test": "npm run compile; mocha test/test.js"
+    "compile-test": "npm run compile; mocha test/test.js",
+    "test": "mocha test/test.js"
   },
   "repository": {
     "type": "git",
