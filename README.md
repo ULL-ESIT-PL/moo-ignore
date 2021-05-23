@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/moo-ignore.svg)](https://badge.fury.io/js/moo-ignore)
 [![Test](https://github.com/ULL-ESIT-PL/moo-ignore/actions/workflows/node.yml/badge.svg?branch=main)](https://github.com/ULL-ESIT-PL/moo-ignore/actions/workflows/node.yml)
 
 # Moo-ignore
