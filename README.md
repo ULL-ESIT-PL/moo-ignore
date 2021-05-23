@@ -72,4 +72,30 @@ module.exports = {
 }
 ```
 
-See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) for more examples of use.
+See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) for more examples of use
+
+```js
+    let s = `
+fun (id, idtwo, idthree)  
+  do   #hello
+    do end;
+    do end # another comment
+  end 
+end`;
+    let ans;
+    try {
+        const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar2args));
+      // Parse something!
+        parser.feed(s);
+        expect(parser.results[0]).deep.equal([
+          'fun',        'lp',
+          'identifier', 'comma',
+          'identifier', 'comma',
+          'identifier', 'rp',
+          'dolua',      'dolua',
+          'end',        'semicolon',
+          'dolua',      'end',
+          'end',        'end'
+        ]);
+        done();
+```
