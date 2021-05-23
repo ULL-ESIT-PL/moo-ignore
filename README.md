@@ -21,14 +21,8 @@ Then you can use it in your Nearley.js program and ignore some tokens like white
 const tokens = require("./tokens");
 const { makeLexer } = require("../index.js");
 
-// Alternatively, you can set to ignore some tokens in the call to `makeLexer`:
-// let lexer = makeLexer(tokens, ["ws", "comment"]);
 let lexer = makeLexer(tokens);
 lexer.ignore("ws", "comment");
-// You can also combine both ways:
-// let lexer = makeLexer(tokens, ["ws"]);
-// lexer.ignore("comment");
-
 
 const getType = ([t]) => t.type;
 %}
@@ -52,8 +46,20 @@ FUN   ->      %fun        {% getType %}
 SEMICOLON ->  ";"         {% getType %}
 ```
 
+Alternatively, you can set to ignore some tokens in the call to `makeLexer`:
 
-Here is the contents of the file `tokens.js` we have used in the former code:
+```js
+let lexer = makeLexer(tokens, ["ws", "comment"]);
+```
+
+Or y ou can also combine both ways:
+
+```js
+let lexer = makeLexer(tokens, ["ws"]);
+lexer.ignore("comment");
+```
+
+For sake of completeness, here is the contents of the file `tokens.js` we have used in the former code:
 
 ```js
 const { moo } = require("moo-ignore");
@@ -76,7 +82,7 @@ module.exports = {
 }
 ```
 
-See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) for more examples of use
+See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) folder in this distribution for more examples of use. Here is a program that tests the former example:
 
 ```js
 const nearley = require("nearley");
@@ -89,7 +95,7 @@ fun (id, idtwo, idthree)
     do end # another comment
   end 
 end`;
-let ans;
+
 try {
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
   parser.feed(s);
