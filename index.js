@@ -1,7 +1,7 @@
 const moo = require("moo");
 
 // Static Method
-function makeLexer(tokens) {
+function makeLexer(tokens, ignoreTokens) {
   let lexer; 
   let oldnext; 
 
@@ -25,6 +25,11 @@ function makeLexer(tokens) {
         console.error("Eh!\n" + e)
     }
   };
+
+  if (ignoreTokens) {
+    lexer.ignore = new Set(ignoreTokens);
+  }
+
   return lexer;
 }
 

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "nearleyc test/test-grammar.ne -o test/test-grammar.js",
+    "compile-separated-ignore": "nearleyc test/test-grammar.ne -o test/test-grammar.js",
+    "compile-2-args": "nearleyc test/test-grammar-2-args.ne -o test/test-grammar-2-args.js",
+    "compile": "npm run compile-separated-ignore; npm run compile-2-args",
     "test": "npm run compile; mocha test/test.js"
   },
   "repository": {
