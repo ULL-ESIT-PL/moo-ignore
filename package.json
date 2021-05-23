@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "nearleyc test/test-grammar.ne -o test/test-grammar.js",
-    "test": "npm run compile; node test/test.js"
+    "test": "npm run compile; mocha test/test.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,9 @@
   "dependencies": {
     "moo": "^0.5.1",
     "nearley": "^2.20.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0"
   }
 }
