@@ -1,2 +1,6 @@
 node_modules
 test/ignore.js
+coverage/
+test/error-tokens.js
+test/test-grammar-error-tokens.ne
+test/test-grammar-error-tokens.js
