@@ -1,14 +1,25 @@
 // @ts-check
 
+/**
+ * moo-ignore module.
+ * @module moo-ignore
+ * @see module:moo
+ */
+
 const moo = require("moo");
 
-// Static Method
+/**
+ * Has all the properties and methods of a moo lexer
+ * @typedef {Function} MooLexer
+ * @property {Set} moolexer.ignoreSet - Set of tokens to ignore
+ * @property {Function} moolexer.ignore  - Method to add/set tokens to ignore
+ */
+
 /**
  * A function that provides a nearley.js compatible lexer 
- * @param {Iterable} tokens - The tokens specifying the lexer
- * @param {Iterable} ignoreTokens - List of tokens to ignore
- * @return {Function} The lexer for the specified tokens ignoring tokens in ignoreTokens
- * @throws Wherever moo throws
+ * @param {Array<Rules>} tokens - The Array of Moo rules specifying the lexer
+ * @param {Array<String>} ignoreTokens - Array of Strings containing the token types to ignore
+ * @returns {MooLexer} moolexer - The Moo lexer for the specified tokens ignoring tokens in ignoreTokens
  */
 
 function makeLexer(tokens, ignoreTokens) {
@@ -18,7 +29,7 @@ function makeLexer(tokens, ignoreTokens) {
   
     lexer = moo.compile(tokens);
     oldnext = lexer.next;
-  
+    
     lexer.ignore = function(...types) {
       if (this.ignoreSet) { // ignoreSet was built at construction time
         this.ignoreSet = new Set([...this.ignoreSet, ...types]); // union
@@ -44,4 +55,18 @@ function makeLexer(tokens, ignoreTokens) {
    
 }
 
-module.exports = {makeLexer, moo};
+
+/**
+ * This module exports an object having the `makeLexer` constructor and the `moo` object (as in `const moo = require("moo")`):
+ */
+
+module.exports = {
+  /**
+   * The lexer constructor
+   */
+  makeLexer, 
+  /**
+   * The moo object (as built in `const moo = require("moo")`)
+   */
+  moo
+};

@@ -15,6 +15,14 @@ Install it:
 $ npm install moo-ignore
 ``` 
 
+## Exports
+
+This module exports an object having the `makeLexer` constructor and the `moo` object (as in `const moo = require("moo")`):
+
+```js
+const { makeLexer, moo } = require("moo-ignore");
+```
+
 ### Ignoring tokens
 
 Then you can use it in your Nearley.js program and ignore some tokens like white spaces and comments:
@@ -23,7 +31,7 @@ Then you can use it in your Nearley.js program and ignore some tokens like white
 ```js
 @{%
 const tokens = require("./tokens");
-const { makeLexer } = require("../index.js");
+const { makeLexer } = require("moo-ignore");
 
 let lexer = makeLexer(tokens);
 lexer.ignore("ws", "comment");
@@ -50,7 +58,7 @@ FUN   ->      %fun        {% getType %}
 SEMICOLON ->  ";"         {% getType %}
 ```
 
-Alternatively, you can set to ignore some tokens in the call to `makeLexer`:
+Alternatively, you can set to ignore some tokens at construction time in the call to `makeLexer`:
 
 ```js
 let lexer = makeLexer(tokens, ["ws", "comment"]);

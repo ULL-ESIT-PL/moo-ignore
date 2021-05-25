@@ -1,0 +1,11 @@
+{
+    "source": {
+        "include": [
+            "index.js",
+            "README.md"
+        ]
+    },
+    "opts": {
+        "template": "node_modules/tui-jsdoc-template"
+    }
+}
