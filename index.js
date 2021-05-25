@@ -9,24 +9,24 @@
 const moo = require("moo");
 
 /**
- * Moo rules
+ * Moo rules as described in https://www.npmjs.com/package/moo
  * @typedef {Object} Rules 
  */
 
 /**
- * Has all the properties and methods of a moo lexer
+ * Has all the properties and methods of a moo lexer. Additionally has the `ignore` method and the `ignoreSet` property
  * @typedef {Function} MooLexer
  * @property {Set} moolexer.ignoreSet - Set of tokens to ignore
  * @property {Function} moolexer.ignore  - Method to add/set tokens to ignore
  */
 
 /**
- * A function that provides a nearley.js compatible lexer 
+ * A function that provides a nearley.js compatible lexer
+ * @static 
  * @param {Array<Rules>} tokens - The Array of Moo rules specifying the lexer
  * @param {Array<String>} ignoreTokens - Array of Strings containing the token types to ignore
- * @returns {MooLexer} moolexer - The Moo lexer for the specified tokens ignoring tokens in ignoreTokens
+ * @returns {...MooLexer} moolexer - The Moo lexer for the specified tokens ignoring tokens in ignoreTokens
  */
-
 function makeLexer(tokens, ignoreTokens) {
   let lexer; 
   let oldnext; 
@@ -34,7 +34,11 @@ function makeLexer(tokens, ignoreTokens) {
   
     lexer = moo.compile(tokens);
     oldnext = lexer.next;
-    
+    /**
+     * Sets or adds the ignoreSet to the  token types specified in the arguments
+     * @memberof MooLexer
+     * @param  {...String} types 
+     */
     lexer.ignore = function(...types) {
       if (this.ignoreSet) { // ignoreSet was built at construction time
         this.ignoreSet = new Set([...this.ignoreSet, ...types]); // union

@@ -2,10 +2,15 @@
     "source": {
         "include": [
             "index.js",
+            "moolexer.js",
             "README.md"
         ]
     },
+    "templates": {
+        "name": "moo-ignore"
+    },
     "opts": {
         "template": "node_modules/tui-jsdoc-template"
-    }
+    },
+    "plugins": ["plugins/markdown"]
 }
