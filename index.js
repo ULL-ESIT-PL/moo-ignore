@@ -9,6 +9,11 @@
 const moo = require("moo");
 
 /**
+ * Moo rules
+ * @typedef {Object} Rules 
+ */
+
+/**
  * Has all the properties and methods of a moo lexer
  * @typedef {Function} MooLexer
  * @property {Set} moolexer.ignoreSet - Set of tokens to ignore
