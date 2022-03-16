@@ -32,12 +32,6 @@ function makeLexer(tokens, ignoreTokens, options = {}) {
   let oldnext; 
   let newTokens = {};
 
-  if (options.eof || options.EOF) {
-    newTokens = { EOF: options.eof || options.EOF };
-    Object.assign(newTokens, tokens); // So that EOF is the first token
-    tokens = newTokens;
-  }
-
     lexer = moo.compile(tokens);
     oldnext = lexer.next;
     /**
@@ -67,7 +61,7 @@ function makeLexer(tokens, ignoreTokens, options = {}) {
     if (options.eof) {
       let oldReset = lexer.reset;
       lexer.reset = function(input) {
-        input += options.eof;
+        if (tokens.EOF) input += tokens.EOF; //Check that exists
         return oldReset.call(this, input)
       }
     }
