@@ -25,9 +25,9 @@ const moo = require("moo");
  * @static 
  * @param {Array<Rules>} tokens - The Array of Moo rules specifying the lexer
  * @param {Array<String>} ignoreTokens - Array of Strings containing the token types to ignore
- * @returns {...MooLexer} moolexer - The Moo lexer for the specified tokens ignoring tokens in ignoreTokens
+ * @returns {MooLexer} moolexer - The Moo lexer for the specified tokens ignoring tokens in ignoreTokens
  */
-function makeLexer(tokens, ignoreTokens) {
+function makeLexer(tokens, ignoreTokens, options = {}) {
   let lexer; 
   let oldnext; 
 
@@ -56,6 +56,11 @@ function makeLexer(tokens, ignoreTokens) {
           //console.error("ignoring token "+token.type);
         }
     };
+
+    if (options.eof) {
+      let oldReset = lexer.reset;
+
+    }
   
     if (ignoreTokens) {
       lexer.ignoreSet = new Set(ignoreTokens);
