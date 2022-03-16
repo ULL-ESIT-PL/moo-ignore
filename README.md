@@ -130,7 +130,8 @@ let lexer = makeLexer(Tokens, [ tokens, to, ignore ], { options });
 
 
 Currently, the only `option` supported in this version is `eof`. 
-By default moo lexers emit `undefined` when the end of the input is reached.
+
+Remember that moo lexers emit `undefined` when the end of the input is reached. This option changes this behavior.
 
 If `{ eof : "termination string" }` is specified, `moo-ignore` will concat the `"termination string"`  at the end of the input stream. The generated lexer will emit this `EOF` token when the end of the input is reached. 
 
