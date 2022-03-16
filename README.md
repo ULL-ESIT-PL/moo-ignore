@@ -23,7 +23,7 @@ This module exports an object having the `makeLexer` constructor and the `moo` o
 const { makeLexer, moo } = require("moo-ignore");
 ```
 
-### Ignoring tokens
+## Ignoring tokens
 
 Then you can use it in your Nearley.js program and ignore some tokens like white spaces and comments:
 
@@ -118,4 +118,29 @@ try {
 } catch (e) {
     console.log(e);
 }
+```
+
+## The eof option: Emitting a token to signal the END OF FILE
+
+The last  argument of `makeLexer` is an object with configuration options:
+
+```js
+let lexer = makeLexer(Tokens, [ Tokens, to, ignore ], { options });
+```
+
+
+Currently, the only `option` supported in this version is `eof`. 
+By default moo lexers emit `undefined` when the end of the input is reached.
+
+If `{ eof : "termination string" }` is specified, `moo-ignore` will concat the `"termination string"`  at the end of the input stream. The generated lexer will emit this `EOF` token when the end of the input is reached. 
+
+Inside your grammar you'll have to include the `EOF` token. Something like this:
+
+```js
+@{%
+const { lexer } = require('./lex.js');
+%}
+@lexer lexer
+program -> expression %EOF {% id %}
+# ... other rules
 ```
