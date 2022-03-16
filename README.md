@@ -120,7 +120,7 @@ try {
 }
 ```
 
-## The eof option: Emitting a token to signal the END OF FILE
+## The eof option: Emitting a token to signal the End Of File
 
 The last  argument of `makeLexer` is an object with configuration options:
 
