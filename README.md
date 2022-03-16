@@ -143,7 +143,7 @@ const Tokens = {
   /* etc. */
 };
 
-let lexer = makeLexer(Tokens, ["WHITES", "LINECOMMENTS", "MULTILINECOMMENTS"], { eof: true });
+let lexer = makeLexer(Tokens, ["WHITES"], { eof: true });
 ```
 
 The generated lexer will emit this `EOF` token when the end of the input is reached. 
