@@ -125,7 +125,7 @@ try {
 The last  argument of `makeLexer` is an object with configuration options:
 
 ```js
-let lexer = makeLexer(Tokens, [ Tokens, to, ignore ], { options });
+let lexer = makeLexer(Tokens, [ tokens, to, ignore ], { options });
 ```
 
 
