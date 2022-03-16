@@ -30,8 +30,14 @@ const moo = require("moo");
 function makeLexer(tokens, ignoreTokens, options = {}) {
   let lexer; 
   let oldnext; 
+  let newTokens = {};
 
-  
+  if (options.eof) {
+    newTokens = { EOF: options.eof };
+    Object.assign(newTokens, tokens);
+    tokens = newTokens;
+  }
+
     lexer = moo.compile(tokens);
     oldnext = lexer.next;
     /**
@@ -57,9 +63,13 @@ function makeLexer(tokens, ignoreTokens, options = {}) {
         }
     };
 
+    debugger;
     if (options.eof) {
       let oldReset = lexer.reset;
-
+      lexer.reset = function(input) {
+        input += options.eof;
+        return oldReset.call(this, input)
+      }
     }
   
     if (ignoreTokens) {
