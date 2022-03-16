@@ -32,9 +32,9 @@ function makeLexer(tokens, ignoreTokens, options = {}) {
   let oldnext; 
   let newTokens = {};
 
-  if (options.eof) {
-    newTokens = { EOF: options.eof };
-    Object.assign(newTokens, tokens);
+  if (options.eof || options.EOF) {
+    newTokens = { EOF: options.eof || options.EOF };
+    Object.assign(newTokens, tokens); // So that EOF is the first token
     tokens = newTokens;
   }
 
