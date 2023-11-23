@@ -57,7 +57,6 @@ function makeLexer(tokens, ignoreTokens, options = {}) {
         }
     };
 
-    debugger;
     if (options.eof) {
       let oldReset = lexer.reset;
       lexer.reset = function(input) {
