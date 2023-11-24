@@ -5,7 +5,6 @@
 
 Moo-ignore (🐄) is a wrapper around the [moo](https://www.npmjs.com/package/moo) tokenizer/lexer generator that provides a [nearley.js](https://github.com/hardmath123/nearley) compatible lexer with the capacity to ignore specified tokens.
 
-Moo-ignore is a wrapper around the moo tokenizer/lexer generator that provides a nearley.js compatible lexer with the capacity to ignore specified tokens.
 
 ## Usage
 
